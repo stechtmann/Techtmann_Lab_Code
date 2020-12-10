@@ -8,6 +8,15 @@ conda create -n assembly -c bioconda -c conda-forge sra-tools fastqc=0.11.5 \
 ```
 
 ## Quality Filter with Trimmomatic
+You need to make sure that you start in the directory with the reads.
+You need to make sure that you change the following 
+- `Forward_reads.fastq.gz` - should be the R1 file
+- `Reverse_reads.fastq.gz` - should be the R2 file
+- `Forward_paired.fq.gz` - should be changed to be something like the following `genome_name_forward_paired.fq.gz`
+- `Forward_unpaired.fq.gz` - should be changed to be something like the following `genome_name_forward_unpaired.fq.gz`
+- `Reverse_paired.fq.gz` - should be changed to be something like the following `genome_name_reverse_paired.fq.gz`
+- `Reverse_unpaired.fq.gz`- should be changed to be something like the following `genome_name_reverse_unpaired.fq.gz`
+
 ```{BASH} 
 java -jar /softwares/Trimmomatic-0.36/trimmomatic-0.36.jar PE -phred33 Forward_reads.fastq.gz Reverse_Reads.fastq.gz Forward_paired.fq.gz Forward_unpaired.fq.gz Reverse_paired.fq.gz Reverse_unpaired.fq.gz ILLUMINACLIP:/softwares/Trimmomatic-0.36/adapters/TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
 ```
@@ -16,7 +25,7 @@ java -jar /softwares/Trimmomatic-0.36/trimmomatic-0.36.jar PE -phred33 Forward_r
 
 ### Build the reference
 ```{bash}
-bowtie2-build E.coli_K-12_substr_MG1655.fasta E.coli_ref
+bowtie2-build /home/ralhajja/old/Adapted_Genomes/E.coli_K-12_substr_MG1655.fasta /home/ralhajja/old/Adapted_Genomes/E.coli_ref
 ```
 
 ### Map your genome to the reference
@@ -26,7 +35,7 @@ You need to change the following
 `Genome_name` is the name of the genome
 
 ```{bash}
-bowtie2 -x E.coli_ref -1 Forward_paired.fq.gz -2 Reverse_paired.fq.gz -S Genome_name.sam
+bowtie2 -x /home/ralhajja/old/Adapted_Genomes/E.coli_ref -1 Forward_paired.fq.gz -2 Reverse_paired.fq.gz -S Genome_name.sam
 ```
 ## Variant identification
 
@@ -48,7 +57,7 @@ cd variant
 ```
 ### Copy the reference genome to the `variant` directory
 ```{BASH}
-cp ../../E.coli_K-12_substr_MG1655.fasta .
+cp /home/ralhajja/old/Adapted_Genomes/E.coli_K-12_substr_MG1655.fasta .
 ```
 - index the reference for variant calling
 ```{BASH}
