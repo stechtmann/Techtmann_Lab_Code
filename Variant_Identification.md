@@ -23,7 +23,7 @@ You need to make sure that you change the following
 - `Reverse_unpaired.fq.gz`- should be changed to be something like the following `genome_name_reverse_unpaired.fq.gz`
 
 ```{BASH} 
-java -jar /softwares/Trimmomatic-0.36/trimmomatic-0.36.jar PE -phred33 Forward_reads.fastq.gz Reverse_Reads.fastq.gz Forward_paired.fq.gz Forward_unpaired.fq.gz Reverse_paired.fq.gz Reverse_unpaired.fq.gz ILLUMINACLIP:/softwares/Trimmomatic-0.36/adapters/TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
+trimmomatic PE -phred33 Forward_reads.fastq.gz Reverse_Reads.fastq.gz Forward_paired.fq.gz Forward_unpaired.fq.gz Reverse_paired.fq.gz Reverse_unpaired.fq.gz ILLUMINACLIP:/home/ralhajja/miniconda3/envs/assembly/share/trimmomatic-0.36-6/adapters/TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
 ```
 
 ## Map the reads to the reference with bowtie2
