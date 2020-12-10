@@ -35,7 +35,7 @@ You need to change the following
 `Genome_name` is the name of the genome
 
 ```{bash}
-bowtie2 -x /home/ralhajja/old/Adapted_Genomes/E.coli_ref -1 Forward_paired.fq.gz -2 Reverse_paired.fq.gz -S Genome_name.sam
+bowtie2 -x /home/ralhajja/old/Adapted_Genomes/E.coli_ref -1 genome_name_forward_paired.fq.gz -2 genome_name_reverse_paired.fq.gz -S Genome_name.sam
 ```
 ## Variant identification
 
