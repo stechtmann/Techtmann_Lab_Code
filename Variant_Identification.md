@@ -9,7 +9,7 @@ conda create -n assembly -c bioconda -c conda-forge sra-tools fastqc=0.11.5 \
 ## Activate the environment with all of the programs
 
 ```{bash}
-conda activate asssembly
+conda activate assembly
 ```
 
 ## Quality Filter with Trimmomatic
