@@ -6,6 +6,11 @@ conda create -n assembly -c bioconda -c conda-forge sra-tools fastqc=0.11.5 \
              trimmomatic=0.36 spades=3.11.1 quast=5.0.2 \
              bowtie2=2.2.5 prokka java-jdk=8.0.112 samtools bcftools --yes
 ```
+## Activate the environment with all of the programs
+
+```{bash}
+conda activate asssembly
+```
 
 ## Quality Filter with Trimmomatic
 You need to make sure that you start in the directory with the reads.
