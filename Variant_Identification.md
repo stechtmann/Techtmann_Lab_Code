@@ -5,13 +5,14 @@
 conda create -n assembly -c bioconda -c conda-forge sra-tools fastqc=0.11.5 \
              trimmomatic=0.36 spades=3.11.1 quast=5.0.2 \
              bowtie2=2.2.5 prokka java-jdk=8.0.112 samtools bcftools --yes
+```
 
-## Trimmomatic
+## Quality Filter with Trimmomatic
 ```{BASH} 
 java -jar /softwares/Trimmomatic-0.36/trimmomatic-0.36.jar PE -phred33 Forward_reads.fastq.gz Reverse_Reads.fastq.gz Forward_paired.fq.gz Forward_unpaired.fq.gz Reverse_paired.fq.gz Reverse_unpaired.fq.gz ILLUMINACLIP:/softwares/Trimmomatic-0.36/adapters/TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
 ```
 
-## Map with bowtie2
+## Map the reads to the reference with bowtie2
 
 ### Build the reference
 ```{bash}
@@ -19,7 +20,7 @@ bowtie2-build E.coli_K-12_substr_MG1655.fasta E.coli_ref
 ```
 
 ### Map your genome to the reference
-You neewd to change the following
+You need to change the following
 `Forward_paired.fq.gz` should be the forward reads for the strain that you're working with
 `Reverse_paired.fq.gz` should be the reverse reads for the strain that you're working with 
 `Genome_name` is the name of the genome
