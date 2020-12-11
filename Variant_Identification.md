@@ -90,5 +90,6 @@ bcftools view -v snps genome_name_calls.vcf > genome_name_snp.vcf
 ```
 ### Annotate variant file
 ```{BASH}
-vcf-annotator genome_name_calls.vcf /home/ralhajja/old/Adapted_Genomes/E.coli_K-12_substr_MG1655.gb
+sed 's/U00096.3/Chromosome/g' Ec_G_calls.vcf > Ec_G_new_call.vcf
+snpEff -v Escherichia_coli_str_k_12_substr_mg1655 Ec_G_new_calls.vcf > out.call.anno
 ```
