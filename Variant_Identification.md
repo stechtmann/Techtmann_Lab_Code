@@ -4,7 +4,7 @@
 ```{bash}
 conda create -n assembly -c bioconda -c conda-forge sra-tools fastqc=0.11.5 \
              trimmomatic=0.36 spades=3.11.1 quast=5.0.2 \
-             bowtie2=2.2.5 prokka java-jdk=8.0.112 samtools bcftools --yes
+             bowtie2=2.2.5 prokka java-jdk=8.0.112 samtools bcftools vcf-annotator --yes
 ```
 ## Activate the environment with all of the programs
 
@@ -87,4 +87,8 @@ less genome_name_calls.vcf
 - Extract only SNPs
 ```{BASH}
 bcftools view -v snps genome_name_calls.vcf > genome_name_snp.vcf
+```
+### Annotate variant file
+```{BASH}
+vcf-annotator genome_name_calls.vcf /home/ralhajja/old/Adapted_Genomes/E.coli_K-12_substr_MG1655.gb
 ```
