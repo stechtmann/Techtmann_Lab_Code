@@ -1,5 +1,11 @@
 # Code for de novo assembly
 
+##Install Packages
+
+conda create -n de_novo -c bioconda -c conda-forge fastqc=0.11.5 \
+             trimmomatic=0.36 spades=3.11.1 quast=5.0.2 \
+             bowtie2=2.2.5 java-jdk=8.0.112 samtools --yes
+
 ## Fastqc
 ```{BASH}
 fastqc 
