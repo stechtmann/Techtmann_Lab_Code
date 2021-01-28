@@ -16,7 +16,7 @@ conda activate de_novo
 
 ## Fastqc
 ```{BASH}
-fastqc 
+fastqc G11_S2_L001_R1_001.fastq.gz
 ```
 
 ## Trimmomatic
