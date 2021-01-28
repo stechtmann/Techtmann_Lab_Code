@@ -8,6 +8,12 @@ conda create -n de_novo -c bioconda -c conda-forge fastqc=0.11.5 \
              bowtie2=2.2.5 java-jdk=8.0.112 samtools --yes
 ```
 
+## Activate the environment
+```{BASH}
+conda activate de_novo
+```
+
+
 ## Fastqc
 ```{BASH}
 fastqc 
@@ -15,7 +21,7 @@ fastqc
 
 ## Trimmomatic
 ```{BASH} 
-java -jar /softwares/Trimmomatic-0.36/trimmomatic-0.36.jar PE -phred33 G11_S2_L001_R1_001.fastq.gz G11_S2_L001_R2_001.fastq.gz G11_R1_paired.fq.gz G11_R1_unpaired.fq.gz G11_R2_paired.fq.gz G11_R2_unpaired.fq.gz ILLUMINACLIP:/softwares/Trimmomatic-0.36/adapters/TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
+trimmomatic-0.36.jar PE -phred33 G11_S2_L001_R1_001.fastq.gz G11_S2_L001_R2_001.fastq.gz G11_R1_paired.fq.gz G11_R1_unpaired.fq.gz G11_R2_paired.fq.gz G11_R2_unpaired.fq.gz ILLUMINACLIP:/softwares/Trimmomatic-0.36/adapters/TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
 ```
 
 ## SPAdes
