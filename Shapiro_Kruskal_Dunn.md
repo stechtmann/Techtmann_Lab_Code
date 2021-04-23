@@ -46,6 +46,8 @@ kruskal.test(Genecopies~Nano_bio_time,data=qPCR_all_LG_time)
 ```
 
 This test was significant.  We will then use the dunn test as a post hoc test to see between which categories is the test significant.
+
+### Perform the Dunn test
 ```{R}
 dunn.test(x=qPCR_all_LG_time$Genecopies,g=qPCR_all_LG_time$Nano_bio_time,method="bh")
 ```
