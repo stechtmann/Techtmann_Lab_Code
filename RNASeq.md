@@ -35,6 +35,6 @@ bowtie2-build C.hydrogenoformans_Z2901.fasta C.hydro
 ### Map reads your indexed reference database
 - Use bowtie 2 to map your reads to your indexed reference genome
 ```{BASH}
-bowtie2 -x C.hydro -1 C.hydro_6008_R1.fastq -2 C.hydro_6008_R2.fastq -S 6008.sam
+bowtie2 -x C.hydro -1 C.hydro_6008_R1.fastq -2 C.hydro_6008_R2.fastq -U C.hydro_6008_unpaired.fastq -S 6008.sam
 ```
  
