@@ -25,8 +25,25 @@ Select a subset of the reads
 ```{BASH}
 trimmomatic PE -phred33 G11_S2_L001_R1_001.fastq.gz G11_S2_L001_R2_001.fastq.gz G11_R1_paired.fq.gz G11_R1_unpaired.fq.gz G11_R2_paired.fq.gz G11_R2_unpaired.fq.gz ILLUMINACLIP:~/miniconda3/pkgs/trimmomatic-0.36-6/share/trimmomatic/adapters/TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
 ```
-## Mapping of reads
- ### Index reference database
+## Mapping of reads with `salmon`
+
+### Making a quantification directory
+```{BASH}
+mkdir quants
+```
+
+### Index the genome sequences for mapping 
+```{BASH}
+salmon index -t StrainM_transcripts.fasta -i StrainM_index
+```
+
+### Map and count reads to the index using salmon.
+```{BASH}
+salmon quant -i StrainM_index -l A -1 M1_A_Paired_R1.fq.gz -2 M1_A_Paired_R2.fq.gz -p 8 --validateMappings -o  quants/M1_A_quant
+```
+
+## Mapping of reads with `bowtie2`
+### Index reference database
 - Use bowtie2 to index your reference genome to make it possible for you to search it
 ```{BASH}
 bowtie2-build C.hydrogenoformans_Z2901.fasta C.hydro
