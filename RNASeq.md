@@ -41,6 +41,44 @@ salmon index -t StrainM_transcripts.fasta -i StrainM_index
 ```{BASH}
 salmon quant -i StrainM_index -l A -1 M1_A_Paired_R1.fq.gz -2 M1_A_Paired_R2.fq.gz -p 8 --validateMappings -o  quants/M1_A_quant
 ```
+## Import into R
+based on https://www.hadriengourle.com/tutorials/rna/
+### Install packages
+
+```{R}
+install.packages("tximport")
+install.packages("GenomicFeatures")
+install.packages("readr")
+```
+
+### Initialize packages
+```{R}
+library(tximport)
+library(GenomicFeatures)
+library(readr)
+```
+
+### Add annotations
+Upload the .gff file to the Biocide_RNASeq directory
+
+```{R}
+txdb_M <- makeTxDbFromGFF("Strain-M.gff")
+k <- keys(txdb_M, keytype = "ID")
+tx2gene <- select(txdb_M, keys = k, keytype = "ID", columns = "TXNAME")
+head(tx2gene)
+```
+### Upload quant data
+
+Make a sample.csv file (comma separated)
+
+```{R}
+samples <- read.csv("sample.csv", header = TRUE)
+files <- file.path("quant", samples$sample, "quant.sf")
+names(files) <- paste0(samples$sample)
+txi.salmon <- tximport(files, type = "salmon", tx2gene = tx2gene)
+```
+
+# Old Don't Use
 
 ## Mapping of reads with `bowtie2`
 ### Index reference database
