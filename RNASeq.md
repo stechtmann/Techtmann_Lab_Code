@@ -73,7 +73,7 @@ Make a sample.csv file (comma separated)
 
 ```{R}
 samples <- read.csv("sample.csv", header = TRUE)
-files <- file.path("quant", samples$sample, "quant.sf")
+files <- file.path("quant_M", samples$sample, "quant.sf")
 names(files) <- paste0(samples$sample)
 txi.salmon <- tximport(files, type = "salmon", tx2gene = tx2gene)
 ```
