@@ -41,7 +41,7 @@ salmon index -t StrainM_transcripts.fasta -i StrainM_index
 ```{BASH}
 salmon quant -i StrainM_index -l A -1 M1_A_Paired_R1.fq.gz -2 M1_A_Paired_R2.fq.gz -p 8 --validateMappings -o  quants/M1_A_quant
 ```
-## Import into R
+## Import into R THIS IS NOW ALL IN R ON THE CONSOLE
 based on https://www.hadriengourle.com/tutorials/rna/
 ### Install packages
 
@@ -71,6 +71,10 @@ names(files) <- paste0(samples$sample)
 txi.salmon <- tximport(files, type = "salmon", tx2gene = tx2gene)
 ```
 N.B. If you don't import annotations rmove `, tx2gene = tx2gene`
+
+
+
+
 # Old Don't Use
 
 ## Mapping of reads with `bowtie2`
