@@ -46,9 +46,11 @@ based on https://www.hadriengourle.com/tutorials/rna/
 ### Install packages
 
 ```{R}
-install.packages("tximport")
-install.packages("GenomicFeatures")
-install.packages("readr")
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("tximport")
+BiocManager::install("GenomicFeatures")
+BiocManager::install("readr")
 ```
 
 ### Initialize packages
@@ -58,15 +60,6 @@ library(GenomicFeatures)
 library(readr)
 ```
 
-### Add annotations
-Upload the .gff file to the Biocide_RNASeq directory
-
-```{R}
-txdb_M <- makeTxDbFromGFF("Strain-M.gff")
-k <- keys(txdb_M, keytype = "ID")
-tx2gene <- select(txdb_M, keys = k, keytype = "ID", columns = "TXNAME")
-head(tx2gene)
-```
 ### Upload quant data
 
 Make a sample.csv file (comma separated)
@@ -77,7 +70,7 @@ files <- file.path("quant_M", samples$sample, "quant.sf")
 names(files) <- paste0(samples$sample)
 txi.salmon <- tximport(files, type = "salmon", tx2gene = tx2gene)
 ```
-
+N.B. If you don't import annotations rmove `, tx2gene = tx2gene`
 # Old Don't Use
 
 ## Mapping of reads with `bowtie2`
@@ -92,4 +85,13 @@ bowtie2-build C.hydrogenoformans_Z2901.fasta C.hydro
 ```{BASH}
 bowtie2 -x C.hydro -1 C.hydro_6008_R1.fastq -2 C.hydro_6008_R2.fastq -U C.hydro_6008_unpaired.fastq -S 6008.sam
 ```
- 
+### Add annotations with Salmon
+Upload the .gff file to the Biocide_RNASeq directory
+
+N.B. Try this, but if it gives errors move on.
+```{R}
+txdb_M <- makeTxDbFromGFF("Strain-M.gff")
+k <- keys(txdb_M, keytype = "ID")
+tx2gene <- select(txdb_M, keys = k, keytype = "ID", columns = "TXNAME")
+head(tx2gene)
+``` 
