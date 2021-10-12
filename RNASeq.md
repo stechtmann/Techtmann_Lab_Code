@@ -43,6 +43,14 @@ salmon quant -i StrainM_index -l A -1 M1_A_Paired_R1.fq.gz -2 M1_A_Paired_R2.fq.
 ```
 ## Import into R THIS IS NOW ALL IN R ON THE CONSOLE
 based on https://www.hadriengourle.com/tutorials/rna/
+
+### Set working directory.
+
+1. Session
+2. Set working directory
+3. Choose directory
+4. Navigate to Biocide_RNASeq
+
 ### Install packages
 
 ```{R}
