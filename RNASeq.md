@@ -70,7 +70,7 @@ library(readr)
 
 ### Upload quant data
 
-Make a sample.csv file (comma separated)
+Make a sample.csv file (comma separated file with samples as one column)
 
 ```{R}
 samples <- read.csv("sample.csv", header = TRUE)
@@ -80,8 +80,31 @@ txi.salmon <- tximport(files, type = "salmon", tx2gene = tx2gene)
 ```
 N.B. If you don't import annotations rmove `, tx2gene = tx2gene`
 
+### Preparing for DESeq
+```{BASH}
+dds <- DESeqDataSetFromTximport(txi.salmon, samples, ~condition)
+```
+Subset the DESeq object
+```{BASH}
+dds_C_G<- dds[,c(columns_to_keep] ## Columns to keep is a comma separated list of the columns in the comparisions you're interested in.
+```
 
-
+Run DESeq2
+```{BASH}
+dds_C_G <- DESeq(dds_C_G, test="Wald", fitType="parametric")
+```
+Export the results
+```{BASH}
+res = results(dds_C_G, cooksCutoff = FALSE)
+```
+Set Significance cutoff
+```{BASH}
+alpha = 0.05
+```
+Export significant results
+```{BASH}
+sigtab = res[which(res$padj < alpha), ]
+```
 
 # Old Don't Use
 
@@ -107,3 +130,5 @@ k <- keys(txdb_M, keytype = "ID")
 tx2gene <- select(txdb_M, keys = k, keytype = "ID", columns = "TXNAME")
 head(tx2gene)
 ``` 
+
+
