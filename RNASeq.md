@@ -106,6 +106,39 @@ Export significant results
 sigtab = res[which(res$padj < alpha), ]
 ```
 
+# Alternative Path for Quant
+
+### Upload quant data
+
+Make a sample.csv file (comma separated file with samples as one column)
+
+**Check to make sure I labeled these correctly**
+```{R}
+samples <- read.csv("sample.csv", header = TRUE)
+samples_CG<-filter(samples,condition=="control"|condition="GA")
+samples_CD<-filter(samples,condition=="control"|condition="DBNPA")
+samples_CB<-filter(samples,condition=="control"|condition="BAC")
+```
+**I can't remember if the header for the sample names is sample or names. So change to what you have in your R script**
+```{R}
+files_CG <- file.path("quant_M", samples_CG$sample, "quant.sf")
+files_CD <- file.path("quant_M", samples_CD$sample, "quant.sf")
+files_CB <- file.path("quant_M", samples_CB$sample, "quant.sf")
+names(files_CG) <- paste0(samples_CG$sample)
+names(files_CD) <- paste0(samples_CD$sample)
+names(files_CB) <- paste0(samples_CB$sample)
+```
+Make 3 import files
+```{R} 
+txi.salmon_CG <- tximport(files_CG, type = "salmon", tx2gene = tx2gene)
+txi.salmon_CD <- tximport(files_CD, type = "salmon", tx2gene = tx2gene)
+txi.salmon_CB <- tximport(files_CB, type = "salmon", tx2gene = tx2gene)
+```
+N.B. If you don't import annotations rmove `, tx2gene = tx2gene`
+
+Then import these three files separatly into DESeq
+
+
 # Old Don't Use
 
 ## Mapping of reads with `bowtie2`
