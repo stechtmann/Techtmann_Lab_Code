@@ -139,6 +139,75 @@ N.B. If you don't import annotations rmove `, tx2gene = tx2gene`
 Then import these three files separatly into DESeq
 
 
+
+# Plotting the DESeq Results
+
+## Add the gene annotation data to the `res` object
+
+## Make Volcano plot
+
+### Add a label of if the genes are significant or not.
+```{R}
+All_res<-dplyr::mutate(All_res,treatment = ifelse(log2FoldChange<=-2 & padj<=0.01,"Biocide",
+                                        ifelse (log2FoldChange>=2 & padj<=0.01, "Control", "Non-significant")))
+```
+### Make a volcano plot
+```{R}
+ggplot(All_res) +
+  geom_point(aes(x=log2FoldChange, y=-log10(padj), colour=significance)) +
+  ggtitle("Control versus Biocide") +
+  xlab("log2 fold change") + 
+  ylab("-log10 adjusted p-value") +
+  #scale_y_continuous(limits = c(0,50)) +
+  theme(legend.position = "none",
+        plot.title = element_text(size = rel(1.5), hjust = 0.5),
+        axis.title = element_text(size = rel(1.25)))  +
+  theme_bw()
+```
+
+## Plot PCA
+You can do this with each of the pairs or you could this with the full dataset
+### Log transform the data
+```{R}
+rld=rlog(dds_C_G)
+```
+### Make PCA
+```{R}
+plotPCA(rld, intgroup = "condition")
+```
+
+### Extract information from the PCA file
+
+```{R}
+pcaData <- plotPCA(rld, intgroup=c("condition"), returnData=TRUE)
+percentVar <- round(100 * attr(pcaData, "percentVar"))
+```
+
+### Make a Pretty PCA
+```{R}
+ggplot(pcaData, aes(PC1, PC2, color=dex, shape=dex)) +
+  geom_point(size=3) +
+  xlab(paste0("PC1: ",percentVar[1],"% variance")) +
+  ylab(paste0("PC2: ",percentVar[2],"% variance")) + 
+  coord_fixed()+
+  theme_bw()
+```
+
+## Plot expression of individual genes
+
+## Plotting Heatmaps.
+**I've not run this before. So it may not work**
+
+```{R}
+library( "genefilter" )
+topVarGenes <- head( order( rowVars( assay(rld) ), decreasing=TRUE ), 35 )
+heatmap.2( assay(rld)[ topVarGenes, ], scale="row", 
+     trace="none", dendrogram="column", 
+     col = colorRampPalette( rev(brewer.pal(9, "RdBu")) )(255),
+     ColSideColors = c( Control="gray", GA="darkgreen", BAC="orange", DBNPA="darkblue" )[
+        colData(rld)$condition ] )
+```
+
 # Old Don't Use
 
 ## Mapping of reads with `bowtie2`
