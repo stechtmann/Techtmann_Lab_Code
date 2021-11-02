@@ -210,6 +210,30 @@ heatmap.2( assay(rld)[ topVarGenes, ], scale="row",
         colData(rld)$condition ] )
 ```
 
+## Adding gene IDs
+
+### Set libraries
+```{R}
+library("tidyverse")
+```
+
+### Read in data
+```{R}
+StrainM_test<-readRDS("sigtabM_C_GA.RDS")
+product<-read_csv("StrainM_names_products.txt")
+```
+
+### Convert gene names to rolws
+```{R}
+StrainM_test<-StrainM_test%>%
+  mutate(GeneID=rownames(StrainM_test))
+```
+### Merge data
+```{R}
+SM_prod<-inner_join(StrainM_test,product)
+```
+
+
 # Old Don't Use
 
 ## Mapping of reads with `bowtie2`
