@@ -220,7 +220,7 @@ library("tidyverse")
 ### Read in data
 ```{R}
 StrainM_test<-readRDS("sigtabM_C_GA.RDS")
-product<-read_csv("StrainM_names_products.txt")
+product<-read_csv("StrainM_names_products.csv")
 ```
 
 ### Convert gene names to rolws
