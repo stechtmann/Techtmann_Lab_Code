@@ -73,18 +73,23 @@ Here are details about the script above.
 
 No it's time to perform the assembly with your trimmed reads
 
+### For housekeeping make an assembly directory
+```{BASH}
+mkdir Assembly
+```
+### Perform Assembly
 
 ```{BASH}
-spades.py -k 21,51,71,91,111,127 --careful --pe1-1 G11_R1_paired.fq.gz --pe1-2 G11_R2_paired.fq.gz --pe1-s G11_R1_unpaired.fq.gz-o G11_spades_output
+spades.py -k 21,51,71,91,111,127 --careful --pe1-1 Trimming/G11_R1_paired.fq.gz --pe1-2 Trimming/G11_R2_paired.fq.gz --pe1-s Trimming/G11_R1_unpaired.fq.gz-o Assembly/G11_spades_output
 ```
-Here are details on the command
-`spades.py` - the command
-`-k 21,51,71,91,111,127` - the kmers to use
-`--careful` - use careful error correction
-`--pe1-1 G11_R1_paired.fq.gz` - the forward paired reads
-`--pe1-2 G11_R2_paired.fq.gz` - the reverse paired reads
-`--pe1-s G11_R1_unpaired.fq.gz` - the unpaired reads
-`-o G11_spades_output` - the output directory to make
+Here are details on the command  
+`spades.py` - the command  
+`-k 21,51,71,91,111,127` - the kmers to use  
+`--careful` - use careful error correction  
+`--pe1-1 Trimming/G11_R1_paired.fq.gz` - the forward paired reads  
+`--pe1-2 Trimming/G11_R2_paired.fq.gz` - the reverse paired reads  
+`--pe1-s Trimming/G11_R1_unpaired.fq.gz` - the unpaired reads  
+`-o Assembly/G11_spades_output` - the output directory to make  
 
 ## Prokka
 
