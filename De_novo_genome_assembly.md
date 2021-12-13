@@ -56,22 +56,22 @@ mkdir Trimming
 ```{BASH} 
 trimmomatic PE -phred33 G11_S2_L001_R1_001.fastq.gz G11_S2_L001_R2_001.fastq.gz Trimming/G11_R1_paired.fq.gz Trimming/G11_R1_unpaired.fq.gz Trimming/G11_R2_paired.fq.gz Trimming/G11_R2_unpaired.fq.gz ILLUMINACLIP:~/miniconda3/pkgs/trimmomatic-0.36-6/share/trimmomatic/adapters/TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
 ```
-Here are details about the script above.
-`G11_S2_L001_R1_001.fastq.gz` - This is your forward read for your raw reads  
-`G11_S2_L001_R2_001.fastq.gz` - This is your reverse read for your raw reads   
-`G11_R1_paired.fq.gz` - This is the new forward paired read  
-`G11_R1_unpaired.fq.gz` - This is the new forward unpaired read  
-`G11_R2_paired.fq.gz` - This is the new reverse paired read  
-`G11_R2_unpaired.fq.gz` - This is the new reverse unpaired read  
-`ILLUMINACLIP:/home/pkokate/miniconda3/pkgs/trimmomatic-0.39-hdfd78af_2/share/trimmomatic/adapters/NexteraPE-PE.fa:2:30:10`  - This is the path to the location of a file that contains the Illumina adapters  
-`LEADING:3`- This trims off the first 3 bases  
-`TRAILING:3` - This trims off the last 3 bases  
-`SLIDINGWINDOW:4:15` - This trims your reads with a sliding window of four bases and an average quality within that window of 15.  If the quality within the four base window drops below 15, it will trim off everything downstream.  
-`MINLEN:36`- If after trimming the reads are less than 36 bp, they will be discarded.  
+Here are details about the script above.  
+- `G11_S2_L001_R1_001.fastq.gz` - This is your forward read for your raw reads  
+- `G11_S2_L001_R2_001.fastq.gz` - This is your reverse read for your raw reads   
+- `G11_R1_paired.fq.gz` - This is the new forward paired read  
+- `G11_R1_unpaired.fq.gz` - This is the new forward unpaired read  
+- `G11_R2_paired.fq.gz` - This is the new reverse paired read  
+- `G11_R2_unpaired.fq.gz` - This is the new reverse unpaired read  
+- `ILLUMINACLIP:/home/pkokate/miniconda3/pkgs/trimmomatic-0.39-hdfd78af_2/share/trimmomatic/adapters/NexteraPE-PE.fa:2:30:10`  - This is the path to the location of a file that contains the Illumina adapters  
+- `LEADING:3`- This trims off the first 3 bases  
+- `TRAILING:3` - This trims off the last 3 bases  
+- `SLIDINGWINDOW:4:15` - This trims your reads with a sliding window of four bases and an average quality within that window of 15.  If the quality within the four base window drops below 15, it will trim off everything downstream.  
+- `MINLEN:36`- If after trimming the reads are less than 36 bp, they will be discarded.  
 
 ## SPAdes
 
-No it's time to perform the assembly with your trimmed reads
+Now it's time to perform the assembly with your trimmed reads
 
 ### For housekeeping make an assembly directory
 ```{BASH}
@@ -83,13 +83,13 @@ mkdir Assembly
 spades.py -k 21,51,71,91,111,127 --careful --pe1-1 Trimming/G11_R1_paired.fq.gz --pe1-2 Trimming/G11_R2_paired.fq.gz --pe1-s Trimming/G11_R1_unpaired.fq.gz-o Assembly/G11_spades_output
 ```
 Here are details on the command  
-`spades.py` - the command  
-`-k 21,51,71,91,111,127` - the kmers to use  
-`--careful` - use careful error correction  
-`--pe1-1 Trimming/G11_R1_paired.fq.gz` - the forward paired reads  
-`--pe1-2 Trimming/G11_R2_paired.fq.gz` - the reverse paired reads  
-`--pe1-s Trimming/G11_R1_unpaired.fq.gz` - the unpaired reads  
-`-o Assembly/G11_spades_output` - the output directory to make  
+- `spades.py` - the command  
+- `-k 21,51,71,91,111,127` - the kmers to use  
+- `--careful` - use careful error correction  
+- `--pe1-1 Trimming/G11_R1_paired.fq.gz` - the forward paired reads  
+- `--pe1-2 Trimming/G11_R2_paired.fq.gz` - the reverse paired reads  
+- `--pe1-s Trimming/G11_R1_unpaired.fq.gz` - the unpaired reads  
+- `-o Assembly/G11_spades_output` - the output directory to make  
 
 ## Prokka
 
