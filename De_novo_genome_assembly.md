@@ -96,7 +96,7 @@ Here are details on the command
 #### Format the SPAdes assembly to be compatible with prokka
 Prokka does not like long names as is the natural output of SPAdes.  To prepare our data for processing with prokka, we must change the names of the contigs.  We will use a unix filter known as `awk` to perform this change.
 ```{BASH}
-awk '/^>/{print ">T1_" ++i; next}{print}' < contigs.fasta > contigs_names.fasta
+awk '/^>/{print ">G11_" ++i; next}{print}' < Assembly/G11_spades_output/contigs.fasta > Assembly/G11_spades_output/contigs_names.fasta
 ```
 This command is performing the following function.
 -  search for lines that start with `>`
@@ -107,5 +107,5 @@ This command is performing the following function.
 
 #### Run the prokka pipeline on the `contigs_names.fasta` file.
 ```{BASH}
-prokka --outdir T1 --prefix T1 contigs_names.fasta
+prokka --outdir G11_prokka --prefix G11 Assembly/G11_spades_output/contigs_names.fasta
 ```
