@@ -84,19 +84,19 @@ N.B. If you don't import annotations rmove `, tx2gene = tx2gene`
 ```{BASH}
 dds <- DESeqDataSetFromTximport(txi.salmon, samples, ~condition)
 ```
-Subset the DESeq object
-```{BASH}
-dds_C_G<- dds[,c(columns_to_keep] ## Columns to keep is a comma separated list of the columns in the comparisions you're interested in.
-```
-
 Run DESeq2
 ```{BASH}
-dds_C_G <- DESeq(dds_C_G, test="Wald", fitType="parametric")
+dds_DESeq <- DESeq(dds_C_G, test="Wald", fitType="parametric")
 ```
 Export the results
+
 ```{BASH}
-res = results(dds_C_G, cooksCutoff = FALSE)
+res_D_G = results(dds_C_G, contrast=c("condition","DBNPA","GA")) cooksCutoff = FALSE)
 ```
+**Note: I'm not sure what the column for contrasts will be called so you may have to look at this. the `"condition"` should be the column name in your metadata file that identifies the treatment and the `"DBNPA"` and `"GA"` are the two treatments you want to compare.
+
+**Note: You'll want to repeate this for all of the comparisons that you're interested in doing, but just change the object you're saving.
+
 Set Significance cutoff
 ```{BASH}
 alpha = 0.05
@@ -106,7 +106,7 @@ Export significant results
 sigtab = res[which(res$padj < alpha), ]
 ```
 
-# Alternative Path for Quant
+# Alternative Path for Quant if the above doesn't work.
 
 ### Upload quant data
 
