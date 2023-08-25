@@ -8,7 +8,7 @@ Currently, ~~some~~ ~~most~~ all of it is under construction
 ---
 ## Index
 * [16S](../blob/main/16S)  
-*. [WIP files](../blob/main/16S/WIP_files)  
+  * [WIP files](../blob/main/16S/WIP_files)  
 * [Metagenomics](../blob/main/Metagenomics)
 
 ---
